@@ -1,0 +1,29 @@
+{
+  "name": "skill-sample-nodejs-numberguessinggame",
+  "version": "2.0.0",
+  "description": "Number guessing game for Alexa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/germanviscuso/skill-sample-nodejs-numberguessinggame.git"
+  },
+  "keywords": [
+    "Alexa",
+    "game",
+    "skill"
+  ],
+  "author": "Amazon.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/germanviscuso/skill-sample-nodejs-numberguessinggame/issues"
+  },
+  "homepage": "https://github.com/germanviscuso/skill-sample-nodejs-numberguessinggame#readme",
+  "dependencies": {
+    "ask-sdk": "^2.0.0",
+    "i18next": "^10.6.0",
+    "i18next-sprintf-postprocessor": "^0.2.2"
+  }
+}

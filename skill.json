@@ -1,0 +1,50 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Guess a number, and Alexa will tell you if you need to guess higher or lower.",
+          "examplePhrases": [
+            "Alexa, open the number guessing game",
+            "Alexa, start he number guessing game",
+            "Alexa, ask the number guessing game if it's {number}"
+          ],
+          "name": "Number Guessing Game",
+          "description": "Guess a number, and Alexa will tell you if you need to guess higher or lower. "
+        },
+        "es-ES": {
+          "summary": "Adivina un número y Alexa te dirá si debes adivinar uno más alto o más bajo.",
+          "examplePhrases": [
+            "Alexa, abre el juego de adivinar el número",
+            "Alexa, lanza el juego de adivinar el número",
+            "Alexa, pregúntale al juego de adivinar el número si es el {number}"
+          ],
+          "name": "Juego de Adivinar el Número",
+          "description": "Adivina un número y Alexa te dirá si debes adivinar uno más alto o más bajo."
+        },
+        "it-IT": {
+          "summary": "Indovina un numero e Alexa ti dirà se devi indovinare più in alto o più in basso.",
+          "examplePhrases": [
+            "Alexa, apri gioco del maggiore o minore",
+            "Alexa, inizia gioco del maggiore o minore",
+            "Alexa, chiedi a gioco del maggiore o minore se è il {number}"
+          ],
+          "name": "Gioco di Indovinare il Numero",
+          "description": "Indovina un numero e Alexa ti dirà se devi indovinare più in alto o più in basso."
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
