@@ -6,6 +6,14 @@ const Alexa = require('ask-sdk');
 const i18n = require('i18next');	
 const sprintf = require('i18next-sprintf-postprocessor');
 
+const languageStrings = {
+  'en' : require('./i18n/en'),
+  'en-GB' : require('./i18n/en-GB'),
+  'es' : require('./i18n/es'),
+  'es-MX' : require('./i18n/es-MX'),
+  'it' : require('./i18n/it')
+}
+
 const LaunchRequest = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -130,7 +138,7 @@ const LocalizationInterceptor = {
       lng: handlerInput.requestEnvelope.request.locale,
       fallbackLng: 'en',
       overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
-      resources: languageString,
+      resources: languageStrings,
       returnObjects: true
     });
 
@@ -140,6 +148,41 @@ const LocalizationInterceptor = {
     }
   }
 }
+
+const LocalizationInterceptorWithArraySupport = {
+  process(handlerInput) {
+      const localizationClient = i18n.use(sprintf).init({
+          lng: handlerInput.requestEnvelope.request.locale,
+          fallbackLng: 'en',
+          resources: languageStrings
+      });
+
+      localizationClient.localize = function () {
+          const args = arguments;
+          let values = [];
+
+          for (var i = 1; i < args.length; i++) {
+              values.push(args[i]);
+          }
+          const value = i18n.t(args[0], {
+              returnObjects: true,
+              postProcess: 'sprintf',
+              sprintf: values
+          });
+
+          if (Array.isArray(value)) {
+              return value[Math.floor(Math.random() * value.length)];
+          } else {
+              return value;
+          }
+      }
+
+      const attributes = handlerInput.attributesManager.getRequestAttributes();
+      attributes.t = function (...args) { // pass on arguments to the localizationClient
+          return localizationClient.localize(...args);
+      };
+  },
+};
 
 const skillBuilder = Alexa.SkillBuilders.standard();
 
@@ -152,51 +195,5 @@ exports.handler = skillBuilder
     NumberGuessIntent,
     UnhandledIntent
   )
-  .addRequestInterceptors(LocalizationInterceptor)
+  .addRequestInterceptors(LocalizationInterceptorWithArraySupport)
   .lambda();
-
-
-  const languageString = {
-    en: {
-      translation: {
-        SKILL_NAME: 'Number Guessing Game',
-        WELCOME_MESSAGE: 'Welcome to the number guessing game',
-        HELP_MESSAGE: 'Please guess my number between 0 and 100',
-        GOODBYE: 'Thanks for playing and goodbye!',
-        TOO_HIGH: 'is too high!',
-        TOO_LOW: 'is too low!',
-        SAY_HIGHER: 'Please say a higher number',
-        SAY_LOWER: 'Please say a lower number',
-        CORRECT: 'is right!',
-        ERROR: 'Sorry, I didn\'t catch that. Please say a number'
-      }
-    },
-    es: {
-      translation: {
-        SKILL_NAME: 'Juego de Adivinar el Número',
-        WELCOME_MESSAGE: 'Bienvenido al juego de adivinar el número',
-        HELP_MESSAGE: 'Por favor adivina en que número del 0 al 100 estoy pensando',
-        GOODBYE: 'Gracias por jugar y hasta pronto!',
-        TOO_HIGH: 'es muy alto!',
-        TOO_LOW: 'es muy bajo!',
-        SAY_HIGHER: 'Dime un número más alto',
-        SAY_LOWER: 'Dime un número más bajo',
-        CORRECT: 'es correcto!',
-        ERROR: 'Lo siento, no te he entendido. Por favor dime un número'
-      }
-    },
-    it:{
-      translation: {
-        SKILL_NAME: 'Gioco di Indovinare il Numero',
-        WELCOME_MESSAGE: 'Benvenuto al gioco di indovinare il numero.',
-        HELP_MESSAGE: 'Per favore per favore indovina quale numero de 1 a 100 sto pensando',
-        GOODBYE: 'Grazie per giocare e arrivederci!',
-        TOO_HIGH: ' è troppo alto!',
-        TOO_LOW: ' è troppo basso!',
-        SAY_HIGHER: 'Dimmi un numero piu alto.',
-        SAY_LOWER: 'Dimmi un numero piu basso.',
-        CORRECT: ' è corretto!',
-        ERROR: 'Mi dispiace, non ho capito. Per favore dimi un numero'
-      }
-    }
-  }

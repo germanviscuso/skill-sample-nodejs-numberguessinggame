@@ -1,0 +1,47 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "number guessing game",
+        "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "NumberGuessIntent",
+          "samples": [
+            "{number}",
+            "is it {number}",
+            "it's {number}",
+            "how about {number}",
+            "could be {number}",
+            "tell me if it's {number}"
+          ],
+          "slots": [{
+              "name": "number", "type": "AMAZON.NUMBER"
+              }]
+        }
+      ]
+    }
+  }
+}

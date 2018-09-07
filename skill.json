@@ -12,7 +12,27 @@
           "name": "Number Guessing Game",
           "description": "Guess a number, and Alexa will tell you if you need to guess higher or lower. "
         },
+        "en-GB": {
+          "summary": "Guess a number, and Alexa will tell you if you need to guess higher or lower.",
+          "examplePhrases": [
+            "Alexa, open the number guessing game",
+            "Alexa, start he number guessing game",
+            "Alexa, ask the number guessing game if it's {number}"
+          ],
+          "name": "Number Guessing Game",
+          "description": "Guess a number, and Alexa will tell you if you need to guess higher or lower. "
+        },
         "es-ES": {
+          "summary": "Adivina un número y Alexa te dirá si debes adivinar uno más alto o más bajo.",
+          "examplePhrases": [
+            "Alexa, abre el juego de adivinar el número",
+            "Alexa, lanza el juego de adivinar el número",
+            "Alexa, pregúntale al juego de adivinar el número si es el {number}"
+          ],
+          "name": "Juego de Adivinar el Número",
+          "description": "Adivina un número y Alexa te dirá si debes adivinar uno más alto o más bajo."
+        },
+        "es-MX": {
           "summary": "Adivina un número y Alexa te dirá si debes adivinar uno más alto o más bajo.",
           "examplePhrases": [
             "Alexa, abre el juego de adivinar el número",
