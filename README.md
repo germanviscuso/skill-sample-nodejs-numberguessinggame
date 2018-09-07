@@ -122,9 +122,13 @@ ASK CLI will create the skill and the lambda function for you. The Lambda functi
 
 2. ```./lambda/custom/index.js```
 
-   Modify messages, and other strings (and perhaps the number range) from the source code to customize the skill.
+   Modify things (like e.g the number range) from the source code to customize the skill.
 
-3. ```./models/*.json```
+3. ```./lambda/custom/i18n/*.json```
+
+	Provide localized strings for the backend in each supported locale.  Repeat the operation for each locale you are planning to support.
+
+4. ```./models/*.json```
 
 	Change the model definition to replace the invocation name and, if necessary for your customization, the sample phrases for each intent.  Repeat the operation for each locale you are planning to support.
 
