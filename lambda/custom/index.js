@@ -16,7 +16,7 @@ const languageStrings = {
 
 const LaunchRequest = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
+    const {request} = handlerInput.requestEnvelope;
     return request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
@@ -34,7 +34,7 @@ const LaunchRequest = {
 
 const ExitHandler = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
+    const {request} = handlerInput.requestEnvelope;
     return request.type === 'IntentRequest'
       && (request.intent.name === 'AMAZON.CancelIntent'
         || request.intent.name === 'AMAZON.StopIntent');
@@ -62,7 +62,7 @@ const SessionEndedRequestHandler = {
 
 const HelpIntent = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
+    const {request} = handlerInput.requestEnvelope;
     return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
@@ -80,11 +80,11 @@ const HelpIntent = {
 
 const NumberGuessIntent = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
+    const {request} = handlerInput.requestEnvelope;
     return request.type === 'IntentRequest' && request.intent.name === 'NumberGuessIntent';
   },
   handle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
+    const {attributesManager} = handlerInput;
     const requestAttributes = attributesManager.getRequestAttributes();
 
     const guessNum = parseInt(handlerInput.requestEnvelope.request.intent.slots.number.value, 10);
@@ -95,26 +95,25 @@ const NumberGuessIntent = {
       targetNum = sessionAttributes.guessNumber;
     }
 
+    const {responseBuilder} = handlerInput;
     if (guessNum > targetNum) {
-      return handlerInput.responseBuilder
+      responseBuilder
         .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_HIGH')}. ${requestAttributes.t('SAY_LOWER')}.`)
-        .reprompt(requestAttributes.t('SAY_LOWER'))
-        .getResponse();
+        .reprompt(requestAttributes.t('SAY_LOWER'));
     } else if (guessNum < targetNum) {
-      return handlerInput.responseBuilder
+      responseBuilder
         .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_LOW')}. ${requestAttributes.t('SAY_HIGHER')}.`)
-        .reprompt(requestAttributes.t('SAY_HIGHER'))
-        .getResponse();
+        .reprompt(requestAttributes.t('SAY_HIGHER'));
     } else if (guessNum === targetNum) {
       attributesManager.setSessionAttributes(sessionAttributes);
-      return handlerInput.responseBuilder
-        .speak(`${guessNum.toString()} ${requestAttributes.t('CORRECT')} ${requestAttributes.t('GOODBYE')}`)
-        .getResponse();
+      responseBuilder
+        .speak(`${guessNum.toString()} ${requestAttributes.t('CORRECT')} ${requestAttributes.t('GOODBYE')}`);
+    } else {
+      responseBuilder
+        .speak(requestAttributes.t('ERROR'))
+        .reprompt(requestAttributes.t('ERROR'));
     }
-    return handlerInput.responseBuilder
-      .speak(requestAttributes.t('ERROR'))
-      .reprompt(requestAttributes.t('ERROR'))
-      .getResponse();
+    return responseBuilder.getResponse();
   }
 }
 
