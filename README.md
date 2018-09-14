@@ -34,6 +34,7 @@ Five
 ### Repository Contents
 * `/.ask`	- [ASK CLI (Command Line Interface) Configuration](https://developer.amazon.com/docs/smapi/ask-cli-intro.html)	 
 * `/lambda/custom` - Back-End Logic for the Alexa Skill hosted on [AWS Lambda](https://aws.amazon.com/lambda/)
+* `/lambda/custom/i18n` - Internationalization strings used in the back-end 
 * `/models` - Voice User Interface and Language Specific Interaction Models
 * `/instructions` - Step-by-Step Instructions for Getting Started
 * `skill.json`	- [Skill Manifest](https://developer.amazon.com/docs/smapi/skill-manifest.html)

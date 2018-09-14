@@ -56,7 +56,12 @@ const SessionEndedRequestHandler = {
   },
   handle(handlerInput) {
     console.log(`Session ended with reason: ${JSON.stringify(handlerInput.requestEnvelope)}`);
-    return handlerInput.responseBuilder.getResponse();
+    if(handlerInput.requestEnvelope.request.reason === 'ERROR')
+      return handlerInput.responseBuilder
+        .speak(requestAttributes.t('ERROR'))
+        .getResponse();
+    else
+      return handlerInput.responseBuilder.getResponse();
   },
 };
 
@@ -96,14 +101,17 @@ const NumberGuessIntent = {
     }
 
     const {responseBuilder} = handlerInput;
+    const currentIntent = handlerInput.requestEnvelope.request.intent;
     if (guessNum > targetNum) {
       responseBuilder
-        .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_HIGH')}. ${requestAttributes.t('SAY_LOWER')}.`)
+        .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_HIGH')} ${requestAttributes.t('SAY_LOWER')}`)
         .reprompt(requestAttributes.t('SAY_LOWER'));
+        //.addConfirmIntentDirective(currentIntent);
     } else if (guessNum < targetNum) {
       responseBuilder
-        .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_LOW')}. ${requestAttributes.t('SAY_HIGHER')}.`)
+        .speak(`${guessNum.toString()} ${requestAttributes.t('TOO_LOW')} ${requestAttributes.t('SAY_HIGHER')}`)
         .reprompt(requestAttributes.t('SAY_HIGHER'));
+        //.addConfirmIntentDirective(currentIntent);
     } else if (guessNum === targetNum) {
       attributesManager.setSessionAttributes(sessionAttributes);
       responseBuilder
