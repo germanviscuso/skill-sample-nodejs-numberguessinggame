@@ -1,0 +1,49 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "nombre pensé",
+        "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "NumberGuessIntent",
+          "samples": [
+            "{number}",
+            "serait-ce {number}",
+            "si ce serait {number}",
+            "si c'est bien {number}",
+            "si c'est {number}",
+            "c'est {number}",
+            "pourquoi pas {number}",
+            "est-ce que c'est {number}",
+            "dis-moi si c'est {number}"
+          ],
+          "slots": [
+            {
+              "name": "number", 
+              "type": "AMAZON.NUMBER"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

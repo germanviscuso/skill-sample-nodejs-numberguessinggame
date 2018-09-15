@@ -11,7 +11,8 @@ const languageStrings = {
   'en-GB' : require('./i18n/en-GB'),
   'es' : require('./i18n/es'),
   'es-MX' : require('./i18n/es-MX'),
-  'it' : require('./i18n/it')
+  'it' : require('./i18n/it'),
+  'fr' : require('./i18n/fr')
 }
 
 const LaunchRequest = {
